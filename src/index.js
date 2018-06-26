@@ -10,20 +10,29 @@ import reducers from './reducer';
 import AuthRoute from './component/anthRoute/anthRoute';
 import './config';
 import 'antd-mobile/dist/antd-mobile.css';
+import './index.css';
 
 import registerServiceWorker from './registerServiceWorker';
 
 
 
 const store = createStore(reducers,compose(
-    applyMiddleware(thunk)
+    applyMiddleware(thunk),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 ))
+
+function Boss(){
+  return (
+      <h2>这是boss页面</h2>
+  )
+}
 
 ReactDOM.render(
         <Provider store={store}>
              <BrowserRouter>
                <div>
                    <AuthRoute></AuthRoute>
+                   <Route path='/boss' component={Boss}/>
                    <Route path='/login' component={Login}/>
                    <Route path='/register' component={Register}/>
                </div>

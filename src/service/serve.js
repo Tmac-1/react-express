@@ -1,21 +1,15 @@
 const express = require('express')
 const userRouter = require('./user')
+const bodyParser = require('body-parser')  // 用来接收post请求
+const cookieParser = require('cookie-parser')  // 用来解析cookie
 
 // 新建app
 const app = express()
 
 // 中间件
+app.use(cookieParser())
+app.use(bodyParser.json())
 app.use('/user',userRouter)
-
-app.get('/',function(req,res){
-    res.send('<h1>火箭总冠军！！！</h1>')
-})
-
-// app.get('/data',function(req,res){
-//     res.json({
-//         "火箭":"总冠军"
-//     })
-// })
 
 app.listen(9093,function () {
     console.log("Node app start at port 9093")
