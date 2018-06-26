@@ -7,9 +7,9 @@ const app = express()
 // 中间件
 app.use('/user',userRouter)
 
-// app.get('/',function(req,res){
-//     res.send('<h1>火箭总冠军！！！</h1>')
-// })
+app.get('/',function(req,res){
+    res.send('<h1>火箭总冠军！！！</h1>')
+})
 
 // app.get('/data',function(req,res){
 //     res.json({
