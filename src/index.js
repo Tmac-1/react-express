@@ -6,6 +6,7 @@ import {Provider} from 'react-redux';
 import {BrowserRouter,Route,Redirect,Switch} from 'react-router-dom';
 import Register from './container/register/register';
 import Login from './container/login/login';
+import BossInfo from './container/bossinfo/bossinfo';
 import reducers from './reducer';
 import AuthRoute from './component/anthRoute/anthRoute';
 import './config';
@@ -32,6 +33,7 @@ ReactDOM.render(
              <BrowserRouter>
                <div>
                    <AuthRoute></AuthRoute>
+                   <Route path='/bossinfo' component={BossInfo}/>
                    <Route path='/boss' component={Boss}/>
                    <Route path='/login' component={Login}/>
                    <Route path='/register' component={Register}/>
