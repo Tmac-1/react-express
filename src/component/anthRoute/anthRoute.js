@@ -8,6 +8,7 @@ class AuthRoute extends React.Component{
     componentDidMount(){
         const publicList = ['/login','/register'];
         const pathname = this.props.location.pathname;
+        //  注册登录页面不需要跳转
         if(publicList.indexOf(pathname) > -1){
             return null;
         }
