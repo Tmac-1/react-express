@@ -1,5 +1,8 @@
 import React from 'react';
+import {Redirect} from 'react-router-dom';
 import {NavBar, InputItem,TextareaItem,Button} from 'antd-mobile';
+import {connect} from 'react-redux';
+import {update} from '../../redux/user.redux';
 import AvatarSelector from '../../component/avatar-selector/avatar-selector'
 
 class BossInfo extends React.Component{
@@ -8,7 +11,7 @@ class BossInfo extends React.Component{
         company:'',
         money:'',
         desc:'',
-        avatar:''
+        avator:''
     }
 
     onChange = (key,val)=>{
@@ -18,8 +21,12 @@ class BossInfo extends React.Component{
     }
 
     render(){
+        const path = this.props.location.pathname;
+        const redirect = this.props.redirectTo;
+        console.log(redirect)
         return (
             <div>
+                {redirect && redirect !==path ? <Redirect to={this.props.redirectTo} /> :null}
                 <NavBar
                    mode="dark"
                 >
@@ -27,7 +34,7 @@ class BossInfo extends React.Component{
                 </NavBar>
                  <AvatarSelector selectAvatar={(imgname)=>{
                      this.setState({
-                         avatar:imgname
+                        avator:imgname
                      })
                  }}/>
                  <InputItem onChange={(v)=>this.onChange('title',v)}>
@@ -47,10 +54,13 @@ class BossInfo extends React.Component{
                    onChange={(v)=>this.onChange('desc',v)}>
                     
                  </TextareaItem>
-                 <Button type='primary' > 保存 </Button>
+                 <Button type='primary' onClick={()=>{this.props.update(this.state)}}> 保存 </Button>
             </div>
         )
     }
 }
 
-export default BossInfo;
+export default  connect(
+    state=>state.user,
+    {update}
+)(BossInfo)  ;

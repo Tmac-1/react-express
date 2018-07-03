@@ -3,7 +3,7 @@ const utils = require('utility')  // 用来MD5加密
 const Router = express.Router();
 const model = require('./model');
 const User = model.getModel('user');
-const _filter = {'pwd':0,'__v':0}  // 过滤密码和__v
+const _filter = {'pwd':0,'__v':0}  // 过滤密码和__v  让返回的data数据里面没有这两项
 
 // 用户列表
 Router.get('/list',function(req,res){
@@ -13,6 +13,24 @@ Router.get('/list',function(req,res){
         return res.json(doc)
     })
 })
+
+// 更新boss信息
+Router.post('/update',function(req,res){
+    const userid = req.cookies.userid
+    if(!userid){
+        return json.dumps({code:1})
+    }
+
+    const body = req.body //查找并更新，这是需要更新的数据项
+    User.findByIdAndUpdate(userid,body,function(err,doc){
+        const data = Object.assign({},{
+            user:doc.user,
+            type:doc.type
+        },body)
+        return  res.json({code:0,data}) 
+    })
+})
+
 
 // 用户登录
 Router.post('/login',function(req,res){
