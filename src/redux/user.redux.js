@@ -28,7 +28,8 @@ export function user(state=initState,action){
 }
 
 // 认证成功（注册、登录、更新boss信息）
-function authSuccess(data){
+function authSuccess(obj){
+    const {pwd,...data} = obj; // 过滤redux里面的pwd
     return {type:AUTH_SUCCESS,payload:data}
 }
 

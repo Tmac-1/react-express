@@ -1,7 +1,13 @@
 import React from 'react';
-import {Grid,List} from 'antd-mobile'
+import {Grid,List} from 'antd-mobile';
+import PropTypes from "prop-types";
 
 class AvatarSelector extends React.Component{
+
+    static propTypes = {
+        selectAvatar:PropTypes.func.isRequired
+    }
+
     state ={ }
     render(){
         const avatarList = 'ai,anxi,caizi,chimu,clay,cp3,gonchen,gorden,james,liuchan,mumu,nash,qingzi,sanjin,xiandao,yingmu'
