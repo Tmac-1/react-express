@@ -9,8 +9,10 @@ const _filter = {'pwd':0,'__v':0}  // 过滤密码和__v  让返回的data数据
 Router.get('/list',function(req,res){
     // 清除用户
     // User.remove({},function(e,d){})
-    User.find({},function(err,doc){
-        return res.json(doc)
+
+    const { type } = req.query   // get方法用query，post的方法用body
+    User.find({ type },function(err,doc){
+        return res.json({code:0,data:doc})
     })
 })
 

@@ -1,13 +1,12 @@
 import React from 'react';
 import { NavBar } from "antd-mobile";
 import  NavLinkBar  from "../../component/navlink/navlink";
+import { Switch , Route } from "react-router-dom";
 import { connect } from "react-redux";
+import Boss from "../../component/boss/boss";
 
 
-function Boss(){
-    return <h2>BOSS 首页</h2>
-}
-function Genius(){
+function Genuis(){
     return <h2>BOSS 首页</h2>
 }
 function Msg(){
@@ -20,32 +19,33 @@ function User(){
 class Dashboard extends React.Component{
  
     render(){
+        // console.log(this.props)
         const user = this.props.user;
+        console.log(user)
         const { pathname } = this.props.location
         const navList =[
          {
              path:'/boss',
              text:'牛人',
-             icon:'boss',
+             icon:'genuis',
              title:'牛人列表',
              component:Boss,
-             hide:user.type ==='genius'
+             hide:user.type ==="genuis"
          },
          {
-            path:'/genius',
+            path:'/genuis',
             text:'BOSS',
-            icon:'genius',
+            icon:'boss',
             title:'BOSS列表',
-            component:Genius,
+            component:Genuis,
             hide:user.type ==='boss'
          },
          {
             path:'/msg',
             text:'消息',
-            icon:'boss',
+            icon:'msg',
             title:'消息列表',
             component:Msg,
-            hide:user.type ==='boss'
          },
          {
             path:'/me',
@@ -57,8 +57,17 @@ class Dashboard extends React.Component{
         ]
         return(
             <div>
-                <NavBar mode='dard'> {navList.find( v=>v.path===pathname).title } </NavBar>
-                <h2>contnet</h2>
+                <NavBar className="fixd-header" mode='dard'> {navList.find( v=>v.path===pathname).title } </NavBar>
+                  <div style={{marginTop:45}}>
+                    <Switch>
+                        {
+                            navList.map(v=>(
+                                <Route key={v.path} path={v.path} component={v.component}/>
+                            ))
+                        }
+                    </Switch>
+                  </div>
+
                 <NavLinkBar data={navList}></NavLinkBar>
             </div>
 
@@ -67,6 +76,6 @@ class Dashboard extends React.Component{
 }
 
 export default connect(
-    state=>state.user,
+    state=>state,
     null
 )(Dashboard)   ;
