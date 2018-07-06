@@ -4,11 +4,8 @@ import  NavLinkBar  from "../../component/navlink/navlink";
 import { Switch , Route } from "react-router-dom";
 import { connect } from "react-redux";
 import Boss from "../../component/boss/boss";
+import Genuis from "../../component/genuis/genuis";
 
-
-function Genuis(){
-    return <h2>BOSS 首页</h2>
-}
 function Msg(){
     return <h2>消息 首页</h2>
 }
