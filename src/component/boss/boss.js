@@ -1,6 +1,7 @@
 import React from 'react';
-import axios from "axios";
+import { connect } from "react-redux";
 import { Card,WingBlank,WhiteSpace } from "antd-mobile"; 
+import { getUserList } from "../../redux/chatuser.redux";
 
 
 class Boss extends React.Component{
@@ -9,11 +10,7 @@ class Boss extends React.Component{
         data:[]
     }
     componentDidMount(){
-        axios.get('/user/list?type=genuis').then( res=>{
-            if( res.data.code ===0){
-                this.setState({data:res.data.data})
-            }
-        })    
+       this.props.getUserList('genuis')
     }
     render(){
         const Header = Card.Header;
@@ -22,7 +19,7 @@ class Boss extends React.Component{
             <WingBlank>
                  <WhiteSpace size='lg'></WhiteSpace>
                 {
-                    this.state.data.map(v=>(
+                    this.props.userList.map(v=>(
                       v.avator?  
                         <Card key={v._id}>
                             <Header
@@ -47,4 +44,7 @@ class Boss extends React.Component{
 
 }
 
-export default Boss
+export default  connect(
+    state=>state.chatuser,
+   { getUserList}
+)(Boss)    

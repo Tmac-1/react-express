@@ -15,7 +15,7 @@ import './config';
 import 'antd-mobile/dist/antd-mobile.css';
 import './index.css';
 
-import registerServiceWorker from './registerServiceWorker';
+// import registerServiceWorker from './registerServiceWorker';
 
 
 
@@ -34,7 +34,7 @@ ReactDOM.render(
                   <AuthRoute></AuthRoute>
                   <Switch>
                     <Route path='/bossinfo' component={BossInfo}/>
-                    <Route path='/geniusinfo' component={Geniusinfo}/>
+                    <Route path='/genuisinfo' component={Geniusinfo}/>
                     <Route path='/login' component={Login}/>
                     <Route path='/register' component={Register}/>
                     <Route component={Dashbord}/>  
@@ -44,4 +44,4 @@ ReactDOM.render(
              </BrowserRouter>
         </Provider>,
 document.getElementById('root'));
-registerServiceWorker();
+// registerServiceWorker();
