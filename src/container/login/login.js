@@ -5,6 +5,49 @@ import { Redirect } from "react-router-dom";
 import {connect} from 'react-redux';
 import { login } from "../../redux/user.redux";
 
+// function hello(){
+//     console.log('I　LOVE　ROCKETS')
+// }
+
+// function WrapperHello(fn){
+//     return function(){
+//         console.log('before')
+//         fn()
+//         console.log('after')
+//     }
+// }
+
+// // 返回一个新的函数, 设计模式里面叫装饰器模式，react里面叫高阶组件
+// hello = WrapperHello(hello)
+
+// hello()
+
+
+class Hello extends React.Component{
+    render(){
+        return <h1>I　LOVE　ROCKETS </h1>
+    }
+}
+
+// 属于属性代理
+function WrapperHello( Comp ){
+    class WrapComp extends React.Component{
+        render(){
+            return (
+                <div>
+                  <p>这是高阶组件特有的元素</p>
+                  <Comp {...this.props}></Comp>
+               </div>
+            )
+
+        }
+    }
+    return WrapComp
+}
+
+const NewHello =  WrapperHello(Hello)
+
+
 
 class Login extends React.Component{
 
@@ -14,7 +57,7 @@ class Login extends React.Component{
    }
 
     register = ()=>{
-        console.log(this.props)
+        // console.log(this.props)
         this.props.history.push('/register')
     }
     handleChagnge = (key,val)=>{
@@ -29,7 +72,9 @@ class Login extends React.Component{
     render(){
         return (
             <div>
-               {this.props.redirectTo ? <Redirect to={this.props.redirectTo}/> : null}
+               <NewHello/> 
+               <Hello/>
+               {this.props.redirectTo && this.props.redirectTo !=='/login' ? <Redirect to={this.props.redirectTo}/> : null}
                 <Logo/>
                 <WingBlank>
                     <List>

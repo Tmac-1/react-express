@@ -5,20 +5,19 @@ import { Switch , Route } from "react-router-dom";
 import { connect } from "react-redux";
 import Boss from "../../component/boss/boss";
 import Genuis from "../../component/genuis/genuis";
+import User from "../../component/user/user";
 
 function Msg(){
     return <h2>消息 首页</h2>
 }
-function User(){
-    return <h2>个人 首页</h2>
-}
+
 
 class Dashboard extends React.Component{
  
     render(){
         // console.log(this.props)
         const user = this.props.user;
-        console.log(user)
+        // console.log(user)
         const { pathname } = this.props.location
         const navList =[
          {
