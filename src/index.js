@@ -10,6 +10,7 @@ import BossInfo from './container/bossinfo/bossinfo';
 import Geniusinfo from './container/geniusinfo/geniusinfo';
 import AuthRoute from './component/anthRoute/anthRoute';
 import Dashbord from "./container/dashboard/dashboard";
+import Chat from "./component/chat/chat";
 import reducers from './reducer';
 import './config';
 import 'antd-mobile/dist/antd-mobile.css';
@@ -37,6 +38,7 @@ ReactDOM.render(
                     <Route path='/genuisinfo' component={Geniusinfo}/>
                     <Route path='/login' component={Login}/>
                     <Route path='/register' component={Register}/>
+                    <Route path='/chat/:user' component={Chat}/>
                     <Route component={Dashbord}/>  
                   </Switch>
 

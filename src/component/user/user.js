@@ -13,7 +13,7 @@ class User extends React.Component{
         alert("注销","确认退出吗？",[
             {text:'取消',onPress:()=>{}},
             {text:'确认',onPress:()=>{
-                //  browserCookie.erase('userid') // 删除cookie  此时后端判断有没有cookie，然后走authroute组件
+                 browserCookie.erase('userid') // 删除cookie  此时后端判断有没有cookie，然后走authroute组件
                  this.props.logoutSubmit()
             }}
         ])
