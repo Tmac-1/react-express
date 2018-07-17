@@ -10,9 +10,14 @@ const app = express()
 const server = require('http').Server(app)
 const io = require('socket.io')(server)
 
-// 监听连接
+// 监听连接  (io是全局请求，socket是当前请求)
 io.on('connection',function(socket){
-    console.log('user login')
+    // console.log('user login')
+    socket.on('sendmsg',function(data){
+        console.log(data)
+        // 广播事件到全局
+        io.emit('recvmsg',data)
+    })
 })
 
 // 中间件
