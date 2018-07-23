@@ -1,6 +1,10 @@
 import React from 'react';
 import { List,InputItem } from "antd-mobile";
+import { connect } from "react-redux";
+import { getMsgList,sendMsg,recvMsg} from "../../redux/chat.redux";
+
 import io from "socket.io-client";
+
 
 // 连接
 const socket =  io('ws://localhost:9093')
@@ -14,21 +18,32 @@ class Chat extends React.Component{
     }
 
     componentDidMount(){
+        this.props.getMsgList()
+        this.props.recvMsg()
      // 接收广播的事件
-        socket.on('recvmsg',(data)=>{
-            console.log(data)
-            this.setState({
-                msg:[...this.state.msg,data.text]
-            })
-        })
+        // socket.on('recvmsg',(data)=>{
+        //     console.log(data)
+        //     this.setState({
+        //         msg:[...this.state.msg,data.text]
+        //     })
+        // })
 
     }
    
     handleSubmit = ()=>{
         // 发送给后端
-        socket.emit('sendmsg',{text:this.state.text})
-        this.setState({text:''})
-        // console.log(this.state)
+        // socket.emit('sendmsg',{text:this.state.text})
+        // this.setState({text:''})
+
+        const from = this.props.user._id;
+        const to = this.props.match.params.user;
+        const msg = this.state.text;
+        this.props.sendMsg({
+            from,to,msg
+        })
+        this.setState({
+            text:''
+        })
     }
 
     render(){
@@ -57,4 +72,9 @@ class Chat extends React.Component{
     }
 }
 
-export default  Chat;
+export default  connect(
+    state => state,
+    {
+      getMsgList,sendMsg,recvMsg
+    }
+)(Chat) ;

@@ -3,6 +3,7 @@ const utils = require('utility')  // 用来MD5加密
 const Router = express.Router();
 const model = require('./model');
 const User = model.getModel('user');
+const Chat = model.getModel('chat');
 const _filter = {'pwd':0,'__v':0}  // 过滤密码和__v  让返回的data数据里面没有这两项
 
 // 用户列表
@@ -13,6 +14,18 @@ Router.get('/list',function(req,res){
     const { type } = req.query   // get方法用query，post的方法用body
     User.find({ type },function(err,doc){
         return res.json({code:0,data:doc})
+    })
+})
+
+// 获取聊天消息列表
+Router.get('/getmsglist',function(req,res){
+    const user = req.cookies.user;
+    // 定义多个查询条件
+    // {'$or':[{from:user,to:user}]}
+    Chat.find({},function(err,doc){
+      if(!err){
+          return res.json({code:0,msgs:doc})
+      }
     })
 })
 
