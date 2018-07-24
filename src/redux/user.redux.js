@@ -27,7 +27,6 @@ export function user(state=initState,action){
        default:
        return state;
     }
-
 }
 
 // 认证成功（注册、登录、更新boss信息）

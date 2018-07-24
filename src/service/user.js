@@ -6,6 +6,12 @@ const User = model.getModel('user');
 const Chat = model.getModel('chat');
 const _filter = {'pwd':0,'__v':0}  // 过滤密码和__v  让返回的data数据里面没有这两项
 
+
+// 清除聊天记录
+// Chat.remove({},function(e,d){
+
+// })
+
 // 用户列表
 Router.get('/list',function(req,res){
     // 清除用户

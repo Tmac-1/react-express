@@ -1,13 +1,13 @@
 import React from 'react';
-import { List,InputItem } from "antd-mobile";
+import { List,InputItem,NavBar} from "antd-mobile";
 import { connect } from "react-redux";
 import { getMsgList,sendMsg,recvMsg} from "../../redux/chat.redux";
 
-import io from "socket.io-client";
+// import io from "socket.io-client";
 
 
 // 连接
-const socket =  io('ws://localhost:9093')
+// const socket =  io('ws://localhost:9093')
 
 
 class Chat extends React.Component{
@@ -47,9 +47,27 @@ class Chat extends React.Component{
     }
 
     render(){
+        const user = this.props.match.params.user;
+        const Item = List.Item
         return (
-            <div>
-                {this.state.msg.map(  v => <p key={v}> {v}</p>
+            <div id="chat-page">
+                <NavBar mode="dark">{this.props.match.params.user}</NavBar>
+                {this.props.chat.chatmsg.map( v => {
+                    return v.from === user ? (
+                      <List key={v._id}>
+                          <Item>{v.content}</Item>
+                      </List>
+                    ):(
+                      <List key={v._id}>
+                          <Item 
+                            extra = {'avatar'}
+                            className = 'chat-me'
+                          >
+                             <Item>{v.content}</Item>
+                          </Item>
+                      </List>
+                    )
+                }
                     
                 )}
                 <div className="stick-footer">
