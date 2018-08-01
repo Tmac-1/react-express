@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import Boss from "../../component/boss/boss";
 import Genuis from "../../component/genuis/genuis";
 import User from "../../component/user/user";
+import { getMsgList,recvMsg } from "../../redux/chat.redux";
 
 function Msg(){
     return <h2>消息 首页</h2>
@@ -14,6 +15,10 @@ function Msg(){
 
 class Dashboard extends React.Component{
  
+    componentDidMount(){
+
+    }
+
     render(){
         // console.log(this.props)
         const user = this.props.user;
@@ -73,5 +78,8 @@ class Dashboard extends React.Component{
 
 export default connect(
     state=>state,
-    null
+    {
+        getMsgList,
+        recvMsg
+    }
 )(Dashboard)   ;
