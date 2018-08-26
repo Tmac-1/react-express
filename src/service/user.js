@@ -25,14 +25,27 @@ Router.get('/list',function(req,res){
 
 // 获取聊天消息列表
 Router.get('/getmsglist',function(req,res){
-    const user = req.cookies.user;
+    const user = req.cookies.userid;
     // 定义多个查询条件
-    // {'$or':[{from:user,to:user}]}
-    Chat.find({},function(err,doc){
-      if(!err){
-          return res.json({code:0,msgs:doc})
-      }
+    // {'$or':[{from:user},{to:user}]}
+    User.find({},function(e,userdoc){
+        let users = {};
+        userdoc.forEach(v=>{
+            users[v._id] = {name:v.user,avatar:v.avator}
+        })
+        Chat.find({'$or':[{from:user},{to:user}]},function(err,doc){
+            if(!err){
+                return res.json({code:0,msgs:doc,users:users})
+            }
+        })
     })
+  
+    // Chat.find({},function(err,doc){
+    //     if(!err){
+    //         return res.json({code:0,msgs:doc})
+    //     }
+    // })
+
 })
 
 // 更新boss信息

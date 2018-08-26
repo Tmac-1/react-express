@@ -8,6 +8,7 @@ import Genuis from "../../component/genuis/genuis";
 import User from "../../component/user/user";
 import { getMsgList,recvMsg } from "../../redux/chat.redux";
 
+
 function Msg(){
     return <h2>消息 首页</h2>
 }
@@ -16,7 +17,8 @@ function Msg(){
 class Dashboard extends React.Component{
  
     componentDidMount(){
-
+        this.props.getMsgList()
+        this.props.recvMsg()
     }
 
     render(){

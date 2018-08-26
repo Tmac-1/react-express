@@ -20,7 +20,7 @@ class NavLinkBar extends React.Component{
                 {
                     navList.map((v=>(
                         <TabBar.Item
-                          badge ='5'
+                          badge ={v.path=='/msg'?this.props.unread:null}
                           key={v.path}
                           title={v.text}
                           icon={{uri:require(`./img/${v.icon}.png`)}}
@@ -42,5 +42,5 @@ export default connect(
     state =>state.chat,
     null
 )(
- withRouter(NavLinkBar)
+    withRouter(NavLinkBar)
 ) 
