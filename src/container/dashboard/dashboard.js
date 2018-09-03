@@ -6,12 +6,8 @@ import { connect } from "react-redux";
 import Boss from "../../component/boss/boss";
 import Genuis from "../../component/genuis/genuis";
 import User from "../../component/user/user";
+import Msg from "../../component/msg/msg";
 import { getMsgList,recvMsg } from "../../redux/chat.redux";
-
-
-function Msg(){
-    return <h2>消息 首页</h2>
-}
 
 
 class Dashboard extends React.Component{
